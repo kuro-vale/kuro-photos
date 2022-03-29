@@ -6,8 +6,6 @@ use App\Models\Photo;
 use Auth;
 use Illuminate\Http\Request;
 
-use function Psy\debug;
-
 class PhotoController extends Controller
 {
     /**
@@ -60,21 +58,23 @@ class PhotoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Photos  $photos
+     * @param  \App\Models\Photo  $photo
      * @return \Illuminate\Http\Response
      */
-    public function show(Photo $photos)
+    public function show(Photo $photo)
     {
-        //
+        return view('photos.show', [
+            'photo' => $photo
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Photos  $photos
+     * @param  \App\Models\Photo  $photo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Photo $photos)
+    public function edit(Photo $photo)
     {
         //
     }
@@ -83,10 +83,10 @@ class PhotoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Photos  $photos
+     * @param  \App\Models\Photo  $photo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Photo $photos)
+    public function update(Request $request, Photo $photo)
     {
         //
     }
@@ -94,10 +94,10 @@ class PhotoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Photos  $photos
+     * @param  \App\Models\Photo  $photo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Photo $photos)
+    public function destroy(Photo $photo)
     {
         //
     }

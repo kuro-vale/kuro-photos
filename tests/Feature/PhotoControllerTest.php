@@ -8,7 +8,6 @@ use Auth;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class PhotoControllerTest extends TestCase
@@ -88,5 +87,26 @@ class PhotoControllerTest extends TestCase
         $response = $this->post('/photos', []);
         $response->assertStatus(302)
             ->assertSessionHasErrors(['title', 'description', 'image']);
+    }
+
+    // Show photo test
+
+    public function test_show_photo()
+    {
+        User::factory()->create();
+        $photo = Photo::factory()->create();
+
+        $response = $this->get("/photos/{$photo->id}");
+        $response->assertStatus(200)
+            ->assertSee($photo->title)
+            ->assertSee($photo->description)
+            ->assertSee($photo->image);
+
+        $this->assertDatabaseHas('photos', [
+            'id' => $photo->id,
+            'title' => $photo->title,
+            'description' => $photo->description,
+            'image' => $photo->image,
+        ]);
     }
 }
