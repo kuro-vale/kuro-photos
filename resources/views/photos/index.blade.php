@@ -29,5 +29,10 @@
     </div>
     @endif
     @endforeach
+    @if(count($photos) == 0)
+    <div class="container-fluid" style="display: flex; height: 85vh; align-items: center; justify-content: center;">
+        <p>Nothing to see here.</p>
+    </div>
+    @endif
 </div>
 @endsection

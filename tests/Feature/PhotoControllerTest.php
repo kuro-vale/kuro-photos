@@ -12,7 +12,7 @@ class PhotoControllerTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
-    public function test_index()
+    public function test_index_show_latest_photos()
     {
         User::factory()->create();
         $photo = Photo::factory()->create();
@@ -29,5 +29,14 @@ class PhotoControllerTest extends TestCase
             'description' => $photo->description,
             'image' => $photo->image,
         ]);
+    }
+
+    public function test_index_empty()
+    {
+        $response = $this->get('/photos');
+        $response->assertStatus(200)
+            ->assertSee('Nothing to see here.');
+
+        $this->assertDatabaseMissing('photos', []);
     }
 }
