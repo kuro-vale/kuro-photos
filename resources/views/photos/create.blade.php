@@ -12,8 +12,8 @@
                         @csrf
 
                         <div class="form-group">
-                            <label>Photo</label>
-                            <input type="file" name="image" class="form-control" accept="image/*">
+                            <label>Photo *</label>
+                            <input type="file" name="image" class="form-control" accept="image/*" required>
                         </div>
 
                         <div class="form-group">

@@ -7,6 +7,8 @@ use App\Models\User;
 use Auth;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class PhotoControllerTest extends TestCase
@@ -56,5 +58,25 @@ class PhotoControllerTest extends TestCase
 
         $response = $this->get('/photos/create');
         $response->assertStatus(200);
+    }
+
+    public function test_store_photo()
+    {
+        $user = User::factory()->create();
+        Auth::login($user);
+        $data = [
+            'title' => 'Test title',
+            'description' => $this->faker->text(),
+            'image' => UploadedFile::fake()->image('test.png'),
+        ];
+
+        $response = $this->post('/photos', $data);
+        $response->assertStatus(302);
+        
+        $this->assertDatabaseHas('photos', [
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'image' => 'photos/' . $data['image']->hashName()
+        ]);
     }
 }

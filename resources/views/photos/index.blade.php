@@ -12,7 +12,7 @@
             <p class="lead">{{ $photo->description }}</p>
         </div>
         <div class="col-md-5">
-            <img src="{{ $photo->image }}" class="img-fluid" alt="Photo of {{ $photo->user->name }}">
+            <img src="{{ Storage::url($photo->image) }}" class="img-fluid" alt="Photo of {{ $photo->user->name }}">
         </div>
     </div>
     @else
@@ -24,7 +24,7 @@
             <p class="lead">{{ $photo->description }}</p>
         </div>
         <div class="col-md-5 order-md-1">
-            <img src="{{ $photo->image }}" class="img-fluid" alt="Photo of {{ $photo->user->name }}">
+            <img src="{{ Storage::url($photo->image) }}" class="img-fluid" alt="Photo of {{ $photo->user->name }}">
         </div>
     </div>
     @endif

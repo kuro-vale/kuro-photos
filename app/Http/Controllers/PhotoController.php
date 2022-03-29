@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Photo;
+use Auth;
 use Illuminate\Http\Request;
+
+use function Psy\debug;
 
 class PhotoController extends Controller
 {
@@ -39,7 +42,13 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $photo = Photo::create([
+            'user_id' => Auth::id(),
+            'title' => $request->title,
+            'description' => $request->description,
+            'image' => $request->file('image')->store('photos', 'public'),
+        ]);
+        return redirect()->route('photos.show', $photo);
     }
 
     /**
