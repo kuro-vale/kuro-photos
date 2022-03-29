@@ -14,7 +14,11 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        //
+        $photos = Photo::latest()->get();
+
+        return view('photos.index', [
+            'photos' => $photos,
+        ]);
     }
 
     /**

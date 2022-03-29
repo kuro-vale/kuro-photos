@@ -10,12 +10,24 @@ use Tests\TestCase;
 
 class PhotoControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithFaker;
 
     public function test_index()
     {
-        $response = $this->get('/photos');
+        User::factory()->create();
+        $photo = Photo::factory()->create();
 
-        $response->assertStatus(200);
+        $response = $this->get('/photos');
+        $response->assertStatus(200)
+            ->assertSee($photo->title)
+            ->assertSee($photo->description)
+            ->assertSee($photo->image);
+
+        $this->assertDatabaseHas('photos', [
+            'id' => $photo->id,
+            'title' => $photo->title,
+            'description' => $photo->description,
+            'image' => $photo->image,
+        ]);
     }
 }

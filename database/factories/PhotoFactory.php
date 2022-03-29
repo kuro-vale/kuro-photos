@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Photos>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Photo>
  */
 class PhotoFactory extends Factory
 {
@@ -20,7 +20,7 @@ class PhotoFactory extends Factory
             'user_id' => 1,
             'title' => $this->faker->title(),
             'description' => $this->faker->text(),
-            'image' => $this->faker->image(),
+            'image' => $this->faker->imageUrl(),
         ];
     }
 }
