@@ -71,12 +71,22 @@ class PhotoControllerTest extends TestCase
         ];
 
         $response = $this->post('/photos', $data);
-        $response->assertStatus(302);
-        
+        $response->assertRedirect('/photos/1');
+
         $this->assertDatabaseHas('photos', [
             'title' => $data['title'],
             'description' => $data['description'],
             'image' => 'photos/' . $data['image']->hashName()
         ]);
+    }
+
+    public function test_validate_store()
+    {
+        $user = User::factory()->create();
+        Auth::login($user);
+
+        $response = $this->post('/photos', []);
+        $response->assertStatus(302)
+            ->assertSessionHasErrors(['title', 'description', 'image']);
     }
 }

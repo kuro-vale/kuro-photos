@@ -42,6 +42,12 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'image' => 'required',
+        ]);
+
         $photo = Photo::create([
             'user_id' => Auth::id(),
             'title' => $request->title,

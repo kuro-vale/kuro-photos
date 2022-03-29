@@ -2,6 +2,13 @@
 
 @section('content')
 <div class="container marketing">
+    <div class="container-fluid mt-5 d-flex justify-content-between">
+        <!-- <form class="d-flex w-75">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form> -->
+        <a href="{{ route('photos.create') }}" class="btn btn-outline-success">Add New Photo</a>
+    </div>
     @foreach($photos as $key=>$photo)
     @if($key % 2 == 0)
     <hr class="featurette-divider">
