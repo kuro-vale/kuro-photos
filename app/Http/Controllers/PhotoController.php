@@ -90,7 +90,16 @@ class PhotoController extends Controller
      */
     public function update(Request $request, Photo $photo)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+
+        $photo->update([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+        return redirect()->route('photos.show', $photo);
     }
 
     /**

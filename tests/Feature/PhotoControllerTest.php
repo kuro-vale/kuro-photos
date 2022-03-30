@@ -124,4 +124,24 @@ class PhotoControllerTest extends TestCase
         $response = $this->get("/photos/{$photo->id}/edit");
         $response->assertStatus(200);
     }
+
+    public function test_update_photo()
+    {
+        $user = User::factory()->create();
+        $photo = Photo::factory()->create();
+        Auth::login($user);
+        $data = [
+            'title' => 'New title',
+            'description' => $this->faker->text(),
+        ];
+
+        $response = $this->put("photos/{$photo->id}", $data);
+        $response->assertRedirect("photos/{$photo->id}");
+
+        $this->assertDatabaseHas('photos', [
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'image' => $photo->image
+        ]);
+    }
 }
