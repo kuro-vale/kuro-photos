@@ -17,9 +17,24 @@
         <div class="col-md-7">
             <h2 class="featurette-heading">{{ $photo->title }}</h2>
             <p class="lead">{{ $photo->description }}</p>
+            <a href="{{ route('photos.show', $photo) }}" class="btn btn-outline-primary">View more</a>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-5" data-bs-toggle="modal" data-bs-target="#modal{{ $photo->id }}">
             <img src="{{ Storage::url($photo->image) }}" class="img-fluid" alt="Photo of {{ $photo->user->name }}">
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modal{{ $photo->id }}" tabindex="-1" aria-labelledby="photoModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="photoModal">{{ $photo->title }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex justify-content-center">
+                    <img src="{{ Storage::url($photo->image) }}" class="img-fluid" alt="Photo of {{ $photo->user->name }}">
+                </div>
+            </div>
         </div>
     </div>
     @else
@@ -29,9 +44,24 @@
         <div class="col-md-7 order-md-2">
             <h2 class="featurette-heading">{{ $photo->title }}</h2>
             <p class="lead">{{ $photo->description }}</p>
+            <a href="{{ route('photos.show', $photo) }}" class="btn btn-outline-primary">View more</a>
         </div>
-        <div class="col-md-5 order-md-1">
+        <div class="col-md-5 order-md-1" data-bs-toggle="modal" data-bs-target="#modal{{ $photo->id }}">
             <img src="{{ Storage::url($photo->image) }}" class="img-fluid" alt="Photo of {{ $photo->user->name }}">
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modal{{ $photo->id }}" tabindex="-1" aria-labelledby="photoModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="photoModal">{{ $photo->title }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex justify-content-center">
+                    <img src="{{ Storage::url($photo->image) }}" class="img-fluid" alt="Photo of {{ $photo->user->name }}">
+                </div>
+            </div>
         </div>
     </div>
     @endif
