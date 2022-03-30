@@ -9,6 +9,14 @@
         </form> -->
         <a href="{{ route('photos.create') }}" class="btn btn-outline-success">Add New Photo</a>
     </div>
+
+    @if(session('status'))
+    <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+        {{ session('status') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
     @foreach($photos as $key=>$photo)
     @if($key % 2 == 0)
     <hr class="featurette-divider">
@@ -20,7 +28,7 @@
             <a href="{{ route('photos.show', $photo) }}" class="btn btn-outline-primary">View more</a>
         </div>
         <div class="col-md-5" data-bs-toggle="modal" data-bs-target="#modal{{ $photo->id }}">
-            <img src="{{ Storage::url($photo->image) }}" class="img-fluid" alt="Photo of {{ $photo->user->name }}">
+            <img src="{{ Storage::url($photo->image) }}" class="img-fluid" alt="Photo by {{ $photo->user->name }}">
         </div>
     </div>
     <!-- Modal -->
@@ -32,7 +40,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body d-flex justify-content-center">
-                    <img src="{{ Storage::url($photo->image) }}" class="img-fluid" alt="Photo of {{ $photo->user->name }}">
+                    <img src="{{ Storage::url($photo->image) }}" class="img-fluid" alt="Photo by {{ $photo->user->name }}">
                 </div>
             </div>
         </div>
@@ -47,7 +55,7 @@
             <a href="{{ route('photos.show', $photo) }}" class="btn btn-outline-primary">View more</a>
         </div>
         <div class="col-md-5 order-md-1" data-bs-toggle="modal" data-bs-target="#modal{{ $photo->id }}">
-            <img src="{{ Storage::url($photo->image) }}" class="img-fluid" alt="Photo of {{ $photo->user->name }}">
+            <img src="{{ Storage::url($photo->image) }}" class="img-fluid" alt="Photo by {{ $photo->user->name }}">
         </div>
     </div>
     <!-- Modal -->
@@ -59,7 +67,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body d-flex justify-content-center">
-                    <img src="{{ Storage::url($photo->image) }}" class="img-fluid" alt="Photo of {{ $photo->user->name }}">
+                    <img src="{{ Storage::url($photo->image) }}" class="img-fluid" alt="Photo by {{ $photo->user->name }}">
                 </div>
             </div>
         </div>

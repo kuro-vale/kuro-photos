@@ -8,6 +8,7 @@ use Auth;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
+use Storage;
 use Tests\TestCase;
 
 class PhotoControllerTest extends TestCase
@@ -63,6 +64,7 @@ class PhotoControllerTest extends TestCase
     {
         $user = User::factory()->create();
         Auth::login($user);
+        Storage::fake('public');
         $data = [
             'title' => 'Test title',
             'description' => $this->faker->text(),
@@ -77,6 +79,8 @@ class PhotoControllerTest extends TestCase
             'description' => $data['description'],
             'image' => 'photos/' . $data['image']->hashName()
         ]);
+
+        Storage::disk('public')->assertExists("photos/" . $data['image']->hashName());
     }
 
     public function test_validate_store_photo()
@@ -158,5 +162,27 @@ class PhotoControllerTest extends TestCase
         $response = $this->put("/photos/{$photo->id}", []);
         $response->assertStatus(302)
             ->assertSessionHasErrors(['title', 'description']);
+    }
+
+    // Destroy photo test
+
+    public function test_destroy_photo()
+    {
+        $user = User::factory()->create();
+        $photo = Photo::factory()->create();
+        Auth::login($user);
+
+        $response = $this->delete("/photos/{$photo->id}");
+        $response->assertRedirect('/photos');
+
+        $this->assertDatabaseMissing('photos', [
+            'id' => $photo->id,
+            'user_id' => $photo->user->id,
+            'title' => $photo->title,
+            'description' => $photo->description,
+            'image' => $photo->image,
+        ]);
+
+        Storage::disk('public')->assertMissing($photo->image);
     }
 }

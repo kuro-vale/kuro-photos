@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Photo;
 use Auth;
 use Illuminate\Http\Request;
+use Storage;
 
 class PhotoController extends Controller
 {
@@ -110,7 +111,11 @@ class PhotoController extends Controller
      */
     public function destroy(Photo $photo)
     {
-        //
+        Storage::disk('public')->delete($photo->image);
+
+        $photo->delete();
+
+        return redirect()->route('photos.index')->with('status', 'Photo deleted');
     }
 
     public function __construct()

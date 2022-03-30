@@ -14,7 +14,7 @@
                     </div>
                     @endif
                     <div class="d-flex justify-content-center">
-                        <img src="{{ Storage::url($photo->image) }}" class="img-fluid" alt="Photo of {{ $photo->user->name }}">
+                        <img src="{{ Storage::url($photo->image) }}" class="img-fluid" alt="Photo by {{ $photo->user->name }}">
                     </div>
                     <h4 class="my-2">{{ $photo->description }}</h4>
                 </div>
