@@ -16,7 +16,7 @@ class PhotoControllerTest extends TestCase
 
     // Index Test
 
-    public function test_index_show_latest_photos()
+    public function test_photo_index_show_latest_photos()
     {
         User::factory()->create();
         $photo = Photo::factory()->create();
@@ -35,7 +35,7 @@ class PhotoControllerTest extends TestCase
         ]);
     }
 
-    public function test_index_empty()
+    public function test_photo_index_empty()
     {
         $response = $this->get('/photos');
         $response->assertStatus(200)
@@ -79,7 +79,7 @@ class PhotoControllerTest extends TestCase
         ]);
     }
 
-    public function test_validate_store()
+    public function test_validate_store_photo()
     {
         $user = User::factory()->create();
         Auth::login($user);
@@ -108,5 +108,20 @@ class PhotoControllerTest extends TestCase
             'description' => $photo->description,
             'image' => $photo->image,
         ]);
+    }
+
+    // Edit photo test
+
+    public function test_edit_photo_return_200_but_guest_redirect_to_login()
+    {
+        $user = User::factory()->create();
+        $photo = Photo::factory()->create();
+        $response = $this->get("/photos/{$photo->id}/edit");
+        $response->assertRedirect('login');
+
+        Auth::login($user);
+
+        $response = $this->get("/photos/{$photo->id}/edit");
+        $response->assertStatus(200);
     }
 }
