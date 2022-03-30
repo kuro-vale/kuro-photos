@@ -133,6 +133,18 @@ class PhotoControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function test_edit_photo_policy()
+    {
+        User::factory()->create();
+        $photo = Photo::factory()->create();
+
+        $newuser = User::factory()->create();
+        Auth::login($newuser);
+
+        $response = $this->get("/photos/{$photo->id}/edit");
+        $response->assertStatus(403);
+    }
+
     public function test_update_photo()
     {
         $user = User::factory()->create();
@@ -164,6 +176,28 @@ class PhotoControllerTest extends TestCase
             ->assertSessionHasErrors(['title', 'description']);
     }
 
+    public function test_update_photo_policy()
+    {
+        User::factory()->create();
+        $photo = Photo::factory()->create();
+
+        $newuser = User::factory()->create();
+        Auth::login($newuser);
+        $data = [
+            'title' => 'New title',
+            'description' => $this->faker->text(),
+        ];
+
+        $response = $this->put("/photos/{$photo->id}", $data);
+        $response->assertStatus(403);
+
+        $this->assertDatabaseHas('photos', [
+            'title' => $photo->title,
+            'description' => $photo->description,
+            'image' => $photo->image
+        ]);
+    }
+
     // Destroy photo test
 
     public function test_destroy_photo()
@@ -182,7 +216,24 @@ class PhotoControllerTest extends TestCase
             'description' => $photo->description,
             'image' => $photo->image,
         ]);
+    }
 
-        Storage::disk('public')->assertMissing($photo->image);
+    public function test_destroy_photo_policy()
+    {
+        User::factory()->create();
+        $photo = Photo::factory()->create();
+        $newuser = User::factory()->create();
+        Auth::login($newuser);
+
+        $response = $this->delete("/photos/{$photo->id}");
+        $response->assertStatus(403);
+
+        $this->assertDatabaseHas('photos', [
+            'id' => $photo->id,
+            'user_id' => $photo->user->id,
+            'title' => $photo->title,
+            'description' => $photo->description,
+            'image' => $photo->image,
+        ]);
     }
 }

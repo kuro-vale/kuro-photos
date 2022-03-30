@@ -77,6 +77,8 @@ class PhotoController extends Controller
      */
     public function edit(Photo $photo)
     {
+        $this->authorize('update', $photo);
+
         return view('photos.edit', [
             'photo' => $photo
         ]);
@@ -91,6 +93,8 @@ class PhotoController extends Controller
      */
     public function update(Request $request, Photo $photo)
     {
+        $this->authorize('update', $photo);
+
         $request->validate([
             'title' => ['required', 'max:80'],
             'description' => ['required', 'max:255'],
@@ -111,6 +115,8 @@ class PhotoController extends Controller
      */
     public function destroy(Photo $photo)
     {
+        $this->authorize('delete', $photo);
+
         Storage::disk('public')->delete($photo->image);
 
         $photo->delete();
