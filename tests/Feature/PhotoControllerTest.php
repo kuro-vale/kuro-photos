@@ -83,8 +83,12 @@ class PhotoControllerTest extends TestCase
     {
         $user = User::factory()->create();
         Auth::login($user);
+        $data = [
+            'title' => $this->faker->text(666),
+            'image' => UploadedFile::fake()->create('notanimage.php')
+        ];
 
-        $response = $this->post('/photos', []);
+        $response = $this->post('/photos', $data);
         $response->assertStatus(302)
             ->assertSessionHasErrors(['title', 'description', 'image']);
     }
@@ -143,5 +147,16 @@ class PhotoControllerTest extends TestCase
             'description' => $data['description'],
             'image' => $photo->image
         ]);
+    }
+
+    public function test_validate_update_photo()
+    {
+        $user = User::factory()->create();
+        $photo = Photo::factory()->create();
+        Auth::login($user);
+
+        $response = $this->put("/photos/{$photo->id}", []);
+        $response->assertStatus(302)
+            ->assertSessionHasErrors(['title', 'description']);
     }
 }

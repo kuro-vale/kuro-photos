@@ -41,9 +41,9 @@ class PhotoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'image' => 'required',
+            'title' => ['required', 'max:80'],
+            'description' => ['required', 'max:255'],
+            'image' => ['required', 'image'],
         ]);
 
         $photo = Photo::create([
@@ -52,7 +52,7 @@ class PhotoController extends Controller
             'description' => $request->description,
             'image' => $request->file('image')->store('photos', 'public'),
         ]);
-        return redirect()->route('photos.show', $photo);
+        return redirect()->route('photos.show', $photo)->with('status', 'Successfully added!');
     }
 
     /**
@@ -91,15 +91,15 @@ class PhotoController extends Controller
     public function update(Request $request, Photo $photo)
     {
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+            'title' => ['required', 'max:80'],
+            'description' => ['required', 'max:255'],
         ]);
 
         $photo->update([
             'title' => $request->title,
             'description' => $request->description,
         ]);
-        return redirect()->route('photos.show', $photo);
+        return redirect()->route('photos.show', $photo)->with('status', 'Successfully updated!');
     }
 
     /**

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)->constrained('users');
             $table->string('title');
-            $table->text('description')->nullable();
+            $table->text('description');
             $table->string('image');
             $table->timestamps();
         });
