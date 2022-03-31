@@ -19,7 +19,7 @@
 
     @foreach($photos as $key=>$photo)
     @if($key % 2 == 0)
-    <hr class="featurette-divider">
+    <hr class="featurette-divider mt-5">
 
     <div class="row featurette">
         <div class="col-md-7">

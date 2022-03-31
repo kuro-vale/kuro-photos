@@ -12,10 +12,15 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $users = User::oldest()->when($request->has('username'), function ($q) use ($request)
+        {
+            return $q->where('username', 'like', '%' . $request->get('username') . '%');
+        })->paginate(12);
+
         return view('users.index', [
-            'users' => User::oldest()->get()
+            'users' => $users
         ]);
     }
     

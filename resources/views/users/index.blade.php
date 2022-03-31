@@ -2,7 +2,21 @@
 
 @section('content')
 <div class="container marketing">
-    <hr class="featurette-divider">
+    <div class="container-fluid mt-5">
+        <form class="d-flex w-85">
+            <input class="form-control me-2" type="search" placeholder="Search User" name="username" value="{{request()->get('username','')}}">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+
+    @if(session('status'))
+    <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+        {{ session('status') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
+    <hr class="featurette-divider mt-5">
     <div class="row">
         @foreach($users as $user)
         <div class="col-lg-4">
@@ -14,5 +28,7 @@
         @endforeach
     </div>
     <hr class="featurette-divider">
+
+    {{ $users->appends(['username' => request()->get('username') ])->links('pagination::bootstrap-5') }}
 </div>
 @endsection
