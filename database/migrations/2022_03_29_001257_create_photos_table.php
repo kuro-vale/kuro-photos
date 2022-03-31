@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained('users');
+            $table->foreignIdFor(User::class)->constrained('users')->onDelete('cascade');
             $table->string('title');
             $table->text('description');
             $table->string('image');
