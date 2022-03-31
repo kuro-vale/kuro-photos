@@ -14,7 +14,7 @@
 
                         <div class="form-group">
                             <label>Title *</label>
-                            <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="@error('title') {{ old('title') }} @else {{ $photo->title }}@enderror" required>
+                            <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="@error('title'){{ old('title') }}@else{{ $photo->title }}@enderror" required>
                             @error('title')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -24,7 +24,7 @@
 
                         <div class="form-group">
                             <label>Description *</label>
-                            <textarea name="description" rows="6" class="form-control @error('description') is-invalid @enderror" required>@error('description') {{ old('description') }} @else {{ $photo->description }}@enderror</textarea>
+                            <textarea name="description" rows="6" class="form-control @error('description') is-invalid @enderror" required>@error('description'){{ old('description') }}@else{{ $photo->description }}@enderror</textarea>
                             @error('description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Auth;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -22,6 +23,16 @@ class UserControllerTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->get('/users');
+        $response->assertStatus(200)
+            ->assertSee($user->username);
+    }
+
+    public function test_edit_user_return_200()
+    {
+        $user = User::factory()->create();
+        Auth::login($user);
+
+        $response = $this->get('/users/settings');
         $response->assertStatus(200)
             ->assertSee($user->username);
     }

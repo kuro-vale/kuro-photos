@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Auth;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -30,9 +31,13 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit()
     {
-        //
+        $user = Auth::user();
+
+        return view('users.edit', [
+            'user' => $user
+        ]);
     }
 
     /**
