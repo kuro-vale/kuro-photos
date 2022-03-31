@@ -14,9 +14,12 @@ class PhotoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $photos = Photo::latest()->get();
+        $photos = Photo::latest()->when($request->has('title'), function ($q) use ($request)
+        {
+            return $q->where('title', 'like', '%' . $request->get('title') . '%');
+        })->paginate(5);
 
         return view('photos.index', [
             'photos' => $photos,

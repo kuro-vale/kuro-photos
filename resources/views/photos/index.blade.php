@@ -3,10 +3,10 @@
 @section('content')
 <div class="container marketing">
     <div class="container-fluid mt-5 d-flex justify-content-between">
-        <!-- <form class="d-flex w-75">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex w-75">
+            <input class="form-control me-2" type="search" placeholder="Search" name="title" value="{{request()->get('title','')}}">
             <button class="btn btn-outline-success" type="submit">Search</button>
-        </form> -->
+        </form>
         <a href="{{ route('photos.create') }}" class="btn btn-outline-success">Add New Photo</a>
     </div>
 
@@ -79,5 +79,8 @@
         <h2>Nothing to see here.</h2>
     </div>
     @endif
+    <hr class="featurette-divider">
+
+    {{ $photos->appends(['title' => request()->get('title') ])->links('pagination::bootstrap-5') }}
 </div>
 @endsection
