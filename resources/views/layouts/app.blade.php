@@ -35,6 +35,9 @@
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ route('photos.index') }}">Photos</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{ route('users.index') }}">Users</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -59,6 +62,10 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('users.edit') }}">
+                                    User Settings
+                                </a>
+
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}

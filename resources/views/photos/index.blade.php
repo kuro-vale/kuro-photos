@@ -26,6 +26,13 @@
             <h2 class="featurette-heading">{{ $photo->title }}</h2>
             <p class="lead">{{ $photo->description }}</p>
             <a href="{{ route('photos.show', $photo) }}" class="btn btn-outline-primary">View more</a>
+            <p class="text-muted mt-3 mb-0">
+                <img src="{{ Storage::url($photo->user->avatar) }}" width="40px" style="border-radius: 50%;" height="40px" alt="Avatar of {{ $photo->user->username }}">
+                &ndash;
+                <a href="#" class="link-dark">{{ $photo->user->username }}</a>
+                &nbsp;
+                {{ $photo->created_at->format('M d Y') }}
+            </p>
         </div>
         <div class="col-md-5" data-bs-toggle="modal" data-bs-target="#modal{{ $photo->id }}">
             <img src="{{ Storage::url($photo->image) }}" class="img-fluid" alt="Photo by {{ $photo->user->name }}">
@@ -53,6 +60,13 @@
             <h2 class="featurette-heading">{{ $photo->title }}</h2>
             <p class="lead">{{ $photo->description }}</p>
             <a href="{{ route('photos.show', $photo) }}" class="btn btn-outline-primary">View more</a>
+            <p class="text-muted mt-3 mb-0">
+                <img src="{{ Storage::url($photo->user->avatar) }}" width="40px" style="border-radius: 50%;" height="40px" alt="Avatar of {{ $photo->user->username }}">
+                &ndash;
+                <a href="#" class="link-dark">{{ $photo->user->username }}</a>
+                &nbsp;
+                {{ $photo->created_at->format('M d Y') }}
+            </p>
         </div>
         <div class="col-md-5 order-md-1" data-bs-toggle="modal" data-bs-target="#modal{{ $photo->id }}">
             <img src="{{ Storage::url($photo->image) }}" class="img-fluid" alt="Photo by {{ $photo->user->name }}">
