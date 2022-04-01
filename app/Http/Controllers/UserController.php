@@ -13,6 +13,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -30,7 +31,6 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function edit()
@@ -46,7 +46,6 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
@@ -84,7 +83,6 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function destroy()
@@ -108,6 +106,7 @@ class UserController extends Controller
      * Display a listing of the resource by user.
      *
      * @param  \App\Models\User  $user
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function user_photos(Request $request, User $user)
@@ -120,6 +119,26 @@ class UserController extends Controller
         return view('users.photos', [
             'user' => $user,
             'photos' => $photos,
+        ]);
+    }
+
+    /**
+     * Display the dashboard of the user.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function dashboard(Request $request)
+    {
+        $user = Auth::user();
+        $user_photos = Photo::latest()->where('user_id', '=', $user->id)->when($request->has('title'), function ($q) use ($request)
+        {
+            return $q->where('title', 'like', '%' . $request->get('title') . '%');
+        })->get();
+
+        return view('users.dashboard', [
+            'user' => $user,
+            'photos' => $user_photos,
         ]);
     }
 }

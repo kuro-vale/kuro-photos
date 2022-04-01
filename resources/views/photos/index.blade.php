@@ -24,7 +24,7 @@
     <div class="row featurette">
         <div class="col-md-7">
             <h2 class="featurette-heading">{{ $photo->title }}</h2>
-            <p class="lead">{{ $photo->description }}</p>
+            <p class="lead text-break">{{ $photo->description }}</p>
             <a href="{{ route('photos.show', $photo) }}" class="btn btn-outline-primary">View more</a>
             <p class="text-muted mt-3 mb-0">
                 <img src="{{ Storage::url($photo->user->avatar) }}" width="40px" style="border-radius: 50%;object-fit: cover;" height="40px" alt="Avatar of {{ $photo->user->username }}">
@@ -53,12 +53,12 @@
         </div>
     </div>
     @else
-    <hr class="featurette-divider">
+    <hr class="featurette-divider mt-5">
 
     <div class="row featurette">
         <div class="col-md-7 order-md-2">
             <h2 class="featurette-heading">{{ $photo->title }}</h2>
-            <p class="lead">{{ $photo->description }}</p>
+            <p class="lead text-break">{{ $photo->description }}</p>
             <a href="{{ route('photos.show', $photo) }}" class="btn btn-outline-primary">View more</a>
             <p class="text-muted mt-3 mb-0">
                 <img src="{{ Storage::url($photo->user->avatar) }}" width="40px" style="border-radius: 50%;object-fit: cover;" height="40px" alt="Avatar of {{ $photo->user->username }}">
@@ -93,7 +93,7 @@
         <h2>Nothing to see here.</h2>
     </div>
     @endif
-    <hr class="featurette-divider">
+    <hr class="featurette-divider mt-5">
 
     {{ $photos->appends(['title' => request()->get('title') ])->links('pagination::bootstrap-5') }}
 </div>

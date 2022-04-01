@@ -18,8 +18,10 @@ Route::resource('/photos', PhotoController::class);
 
 // Users
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
-Route::get('/users/settings', [UserController::class, 'edit'])->name('users.edit')->middleware('auth');
-Route::put('/users/settings', [UserController::class, 'update'])->name('users.update')->middleware('auth');
-Route::delete('/users/settings', [UserController::class, 'destroy'])->name('users.destroy')->middleware('auth');
+Route::get('/user/settings', [UserController::class, 'edit'])->name('users.edit')->middleware('auth');
+Route::put('/user/settings', [UserController::class, 'update'])->name('users.update')->middleware('auth');
+Route::delete('/user/settings', [UserController::class, 'destroy'])->name('users.destroy')->middleware('auth');
 // User photos
-Route::get('/users/photos/{user:username}', [UserController::class, 'user_photos'])->name('users.photos');
+Route::get('/user/photos/{user:username}', [UserController::class, 'user_photos'])->name('users.photos');
+// User Dashboard
+Route::get('/user/dashboard', [UserController::class, 'dashboard'])->middleware('auth')->name('users.dashboard');

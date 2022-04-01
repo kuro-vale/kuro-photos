@@ -39,7 +39,7 @@ class UserControllerTest extends TestCase
         $user = User::factory()->create();
         Auth::login($user);
 
-        $response = $this->get('/users/settings');
+        $response = $this->get('/user/settings');
         $response->assertStatus(200)
             ->assertSee($user->username);
     }
@@ -55,8 +55,8 @@ class UserControllerTest extends TestCase
             'avatar' => UploadedFile::fake()->image('test.png'),
         ];
 
-        $response = $this->put('/users/settings', $data);
-        $response->assertRedirect('/users/settings');
+        $response = $this->put('/user/settings', $data);
+        $response->assertRedirect('/user/settings');
 
         $this->assertDatabaseHas('users', [
             'name' => $data['name'],
@@ -70,7 +70,7 @@ class UserControllerTest extends TestCase
         $user = User::factory()->create();
         Auth::login($user);
 
-        $response = $this->put('/users/settings', []);
+        $response = $this->put('/user/settings', []);
         $response->assertStatus(302)
             ->assertSessionHasErrors(['username', 'name']);
     }
@@ -82,7 +82,7 @@ class UserControllerTest extends TestCase
         $user = User::factory()->create();
         Auth::login($user);
 
-        $response = $this->delete('/users/settings');
+        $response = $this->delete('/user/settings');
         $response->assertRedirect('/users');
 
         $this->assertDatabaseMissing('users', [
@@ -99,7 +99,20 @@ class UserControllerTest extends TestCase
         $user = User::factory()->create();
         $photo = Photo::factory()->create();
 
-        $response = $this->get("/users/photos/{$user->username}");
+        $response = $this->get("/user/photos/{$user->username}");
+        $response->assertStatus(200)
+            ->assertSee($photo->title);
+    }
+
+    // Dashboard tet
+
+    public function test_user_dashboard()
+    {
+        $user = User::factory()->create();
+        $photo = Photo::factory()->create();
+        Auth::login($user);
+
+        $response = $this->get('/user/dashboard');
         $response->assertStatus(200)
             ->assertSee($photo->title);
     }

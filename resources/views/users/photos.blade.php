@@ -2,13 +2,16 @@
 
 @section('content')
 <div class="container marketing">
+    <div class="d-flex justify-content-between align-items-end">
+        <h2 class="featurette-heading">{{ $user->username }}'s photos</h2>
+        <img src="{{ Storage::url($user->avatar) }}" width="110px" style="border-radius: 50%;object-fit: cover;" height="110px" alt="Avatar of {{ $user->username }}" class="mt-3">
+    </div>
     <div class="container-fluid mt-5">
-        <form class="d-flex w-75">
+        <form class="d-flex w-85">
             <input class="form-control me-2" type="search" placeholder="Search" name="title" value="{{request()->get('title','')}}">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
     </div>
-    <h2 class="featurette-heading">Photos by {{ $user->username }}</h2>
     @foreach($photos as $key=>$photo)
     @if($key % 2 == 0)
     <hr class="featurette-divider mt-5">
@@ -16,13 +19,9 @@
     <div class="row featurette">
         <div class="col-md-7">
             <h2 class="featurette-heading">{{ $photo->title }}</h2>
-            <p class="lead">{{ $photo->description }}</p>
+            <p class="lead text-break">{{ $photo->description }}</p>
             <a href="{{ route('photos.show', $photo) }}" class="btn btn-outline-primary">View more</a>
             <p class="text-muted mt-3 mb-0">
-                <img src="{{ Storage::url($photo->user->avatar) }}" width="40px" style="border-radius: 50%;object-fit: cover;" height="40px" alt="Avatar of {{ $photo->user->username }}">
-                &ndash;
-                <a href="{{ route('users.photos', $user) }}" class="link-dark">{{ $photo->user->username }}</a>
-                &nbsp;
                 {{ $photo->created_at->format('M d Y') }}
             </p>
         </div>
@@ -45,18 +44,14 @@
         </div>
     </div>
     @else
-    <hr class="featurette-divider">
+    <hr class="featurette-divider mt-5">
 
     <div class="row featurette">
         <div class="col-md-7 order-md-2">
             <h2 class="featurette-heading">{{ $photo->title }}</h2>
-            <p class="lead">{{ $photo->description }}</p>
+            <p class="lead text-break">{{ $photo->description }}</p>
             <a href="{{ route('photos.show', $photo) }}" class="btn btn-outline-primary">View more</a>
             <p class="text-muted mt-3 mb-0">
-                <img src="{{ Storage::url($photo->user->avatar) }}" width="40px" style="border-radius: 50%;object-fit: cover;" height="40px" alt="Avatar of {{ $photo->user->username }}">
-                &ndash;
-                <a href="{{ route('users.photos', $user) }}" class="link-dark">{{ $photo->user->username }}</a>
-                &nbsp;
                 {{ $photo->created_at->format('M d Y') }}
             </p>
         </div>
@@ -85,7 +80,7 @@
         <h2>Nothing to see here.</h2>
     </div>
     @endif
-    <hr class="featurette-divider">
+    <hr class="featurette-divider mt-5">
 
     {{ $photos->appends(['title' => request()->get('title') ])->links('pagination::bootstrap-5') }}
 </div>

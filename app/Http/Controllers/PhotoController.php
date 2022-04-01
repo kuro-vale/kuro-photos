@@ -45,7 +45,7 @@ class PhotoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => ['required', 'max:80'],
+            'title' => ['required', 'max:20'],
             'description' => ['required', 'max:255'],
             'image' => ['required', 'image'],
         ]);
@@ -99,7 +99,7 @@ class PhotoController extends Controller
         $this->authorize('update', $photo);
 
         $request->validate([
-            'title' => ['required', 'max:80'],
+            'title' => ['required', 'max:20'],
             'description' => ['required', 'max:255'],
         ]);
 
