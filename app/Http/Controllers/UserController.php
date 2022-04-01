@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Photo;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -90,9 +91,14 @@ class UserController extends Controller
     {
         $user = Auth::user();
         Auth::logout($user);
+        $user_photos = Photo::select('image')->where('user_id', '=', $user->id)->get()->toArray();
         if ($user->avatar != 'avatars/default-avatar.png')
         {
             Storage::disk('public')->delete($user->avatar);
+        }
+        foreach ($user_photos as $photo)
+        {
+            Storage::disk('public')->delete($photo);
         }
         $user->delete();
         return redirect()->route('users.index')->with('status', 'User deleted!!!');
