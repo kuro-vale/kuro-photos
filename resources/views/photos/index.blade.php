@@ -27,7 +27,7 @@
             <p class="lead">{{ $photo->description }}</p>
             <a href="{{ route('photos.show', $photo) }}" class="btn btn-outline-primary">View more</a>
             <p class="text-muted mt-3 mb-0">
-                <img src="{{ Storage::url($photo->user->avatar) }}" width="40px" style="border-radius: 50%;" height="40px" alt="Avatar of {{ $photo->user->username }}">
+                <img src="{{ Storage::url($photo->user->avatar) }}" width="40px" style="border-radius: 50%;object-fit: cover;" height="40px" alt="Avatar of {{ $photo->user->username }}">
                 &ndash;
                 <a href="#" class="link-dark">{{ $photo->user->username }}</a>
                 &nbsp;
@@ -61,7 +61,7 @@
             <p class="lead">{{ $photo->description }}</p>
             <a href="{{ route('photos.show', $photo) }}" class="btn btn-outline-primary">View more</a>
             <p class="text-muted mt-3 mb-0">
-                <img src="{{ Storage::url($photo->user->avatar) }}" width="40px" style="border-radius: 50%;" height="40px" alt="Avatar of {{ $photo->user->username }}">
+                <img src="{{ Storage::url($photo->user->avatar) }}" width="40px" style="border-radius: 50%;object-fit: cover;" height="40px" alt="Avatar of {{ $photo->user->username }}">
                 &ndash;
                 <a href="#" class="link-dark">{{ $photo->user->username }}</a>
                 &nbsp;

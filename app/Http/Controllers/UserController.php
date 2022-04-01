@@ -24,7 +24,7 @@ class UserController extends Controller
             'users' => $users
         ]);
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -47,9 +47,32 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
-        //
+        $validatedata = [
+            'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'min:2', 'max:25', 'unique:users'],
+            'avatar' => ['nullable', 'image']
+        ];
+        $user = Auth::user();
+        if ($user->username == $request->username)
+        {
+            $validatedata['username'] = ['required', 'string', 'min:2', 'max:25'];
+        }
+        $request->validate($validatedata);
+
+        $user->update([
+            'username' => $request->username,
+            'name' => $request->name,
+        ]);
+
+        if ($request->file('avatar'))
+        {
+            $user->avatar = $request->file('avatar')->store('avatars', 'public');
+            $user->save();
+        }
+
+        return redirect()->route('users.edit')->with('status', 'Settings successfully updated!');
     }
 
     /**
