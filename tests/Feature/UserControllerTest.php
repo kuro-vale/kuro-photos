@@ -73,4 +73,22 @@ class UserControllerTest extends TestCase
         $response->assertStatus(302)
             ->assertSessionHasErrors(['username', 'name']);
     }
+
+    // Destroy user test
+
+    public function test_destroy_photo()
+    {
+        $user = User::factory()->create();
+        Auth::login($user);
+
+        $response = $this->delete('/users/settings');
+        $response->assertRedirect('/users');
+
+        $this->assertDatabaseMissing('users', [
+            'id' => $user->id,
+            'name' => $user->name,
+            'username' => $user->username,
+            'avatar' => $user->avatar,
+        ]);
+    }
 }

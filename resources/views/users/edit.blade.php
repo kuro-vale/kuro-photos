@@ -66,12 +66,20 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-outline-primary">
                                     {{ __('Update Settings') }}
                                 </button>
                             </div>
                         </div>
                     </form>
+                    <div class="d-flex justify-content-end">
+                        <form method="POST" action="{{ route('users.destroy') }}">
+                            @csrf
+                            @method('delete')
+
+                            <button type="submit" class="btn btn-outline-danger">Delete user</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
+use Storage;
 
 class UserController extends Controller
 {
@@ -68,6 +69,10 @@ class UserController extends Controller
 
         if ($request->file('avatar'))
         {
+            if ($user->avatar != 'avatars/default-avatar.png')
+            {
+                Storage::disk('public')->delete($user->avatar);
+            }
             $user->avatar = $request->file('avatar')->store('avatars', 'public');
             $user->save();
         }
@@ -81,8 +86,15 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy()
     {
-        //
+        $user = Auth::user();
+        Auth::logout($user);
+        if ($user->avatar != 'avatars/default-avatar.png')
+        {
+            Storage::disk('public')->delete($user->avatar);
+        }
+        $user->delete();
+        return redirect()->route('users.index')->with('status', 'User deleted!!!');
     }
 }
