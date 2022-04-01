@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Photo;
 use App\Models\User;
 use Auth;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -90,5 +91,16 @@ class UserControllerTest extends TestCase
             'username' => $user->username,
             'avatar' => $user->avatar,
         ]);
+    }
+    // All user photos test
+
+    public function test_photos_by_user()
+    {
+        $user = User::factory()->create();
+        $photo = Photo::factory()->create();
+
+        $response = $this->get("/users/photos/{$user->username}");
+        $response->assertStatus(200)
+            ->assertSee($photo->title);
     }
 }

@@ -23,7 +23,7 @@
             <img src="{{ Storage::url($user->avatar) }}" width="140px" style="border-radius: 50%;object-fit: cover;" height="140px" alt="Avatar of {{ $user->username }}">
 
             <h2>{{ $user->username }}</h2>
-            <p><a class="btn btn-secondary" href="#">View Photos &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="{{ route('users.photos', $user) }}">View Photos &raquo;</a></p>
         </div>
         @endforeach
     </div>

@@ -2,21 +2,13 @@
 
 @section('content')
 <div class="container marketing">
-    <div class="container-fluid mt-5 d-flex justify-content-between">
+    <div class="container-fluid mt-5">
         <form class="d-flex w-75">
             <input class="form-control me-2" type="search" placeholder="Search" name="title" value="{{request()->get('title','')}}">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
-        <a href="{{ route('photos.create') }}" class="btn btn-outline-success">Add New Photo</a>
     </div>
-
-    @if(session('status'))
-    <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-        {{ session('status') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
-
+    <h2 class="featurette-heading">Photos by {{ $user->username }}</h2>
     @foreach($photos as $key=>$photo)
     @if($key % 2 == 0)
     <hr class="featurette-divider mt-5">
@@ -29,7 +21,7 @@
             <p class="text-muted mt-3 mb-0">
                 <img src="{{ Storage::url($photo->user->avatar) }}" width="40px" style="border-radius: 50%;object-fit: cover;" height="40px" alt="Avatar of {{ $photo->user->username }}">
                 &ndash;
-                <a href="{{ route('users.photos', $photo->user) }}" class="link-dark">{{ $photo->user->username }}</a>
+                <a href="{{ route('users.photos', $user) }}" class="link-dark">{{ $photo->user->username }}</a>
                 &nbsp;
                 {{ $photo->created_at->format('M d Y') }}
             </p>
@@ -63,7 +55,7 @@
             <p class="text-muted mt-3 mb-0">
                 <img src="{{ Storage::url($photo->user->avatar) }}" width="40px" style="border-radius: 50%;object-fit: cover;" height="40px" alt="Avatar of {{ $photo->user->username }}">
                 &ndash;
-                <a href="{{ route('users.photos', $photo->user) }}" class="link-dark">{{ $photo->user->username }}</a>
+                <a href="{{ route('users.photos', $user) }}" class="link-dark">{{ $photo->user->username }}</a>
                 &nbsp;
                 {{ $photo->created_at->format('M d Y') }}
             </p>

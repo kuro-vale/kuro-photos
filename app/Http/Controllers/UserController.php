@@ -53,13 +53,13 @@ class UserController extends Controller
     {
         $validatedata = [
             'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'min:2', 'max:25', 'unique:users'],
+            'username' => ['required', 'string', 'min:2', 'max:25', 'unique:users', 'alpha_dash'],
             'avatar' => ['nullable', 'image']
         ];
         $user = Auth::user();
         if ($user->username == $request->username)
         {
-            $validatedata['username'] = ['required', 'string', 'min:2', 'max:25'];
+            $validatedata['username'] = ['required', 'string', 'min:2', 'max:25', 'alpha_dash'];
         }
         $request->validate($validatedata);
 
@@ -102,5 +102,24 @@ class UserController extends Controller
         }
         $user->delete();
         return redirect()->route('users.index')->with('status', 'User deleted!!!');
+    }
+
+    /**
+     * Display a listing of the resource by user.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function user_photos(Request $request, User $user)
+    {
+        $photos = Photo::latest()->where('user_id', '=', $user->id)->when($request->has('title'), function ($q) use ($request)
+        {
+            return $q->where('title', 'like', '%' . $request->get('title') . '%');
+        })->paginate(5);;
+
+        return view('users.photos', [
+            'user' => $user,
+            'photos' => $photos,
+        ]);
     }
 }
