@@ -27,7 +27,7 @@ class CommentController extends Controller
             'photo_id' => $photo->id,
             'body' => $request->body,
         ]);
-        return back()->with('status', 'Successfully created');
+        return redirect()->route('photos.show', $photo)->with('status', 'Successfully created');
     }
 
     /**
@@ -40,7 +40,16 @@ class CommentController extends Controller
      */
     public function update(Request $request, Photo $photo, Comment $comment)
     {
-        // 
+        $this->authorize('update', $comment);
+
+        $request->validate([
+            'body' => ['required', 'max:255']
+        ]);
+
+        $comment->update([
+            'body' => $request->body
+        ]);
+        return redirect()->route('photos.show', $photo)->with('status', 'Successfully updated');
     }
 
     /**
