@@ -32,11 +32,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
+                        <li class="nav-item mx-5">
+                            <a class="nav-link" href="{{ route('home') }}">Home</a>
+                        </li>
+                        <li class="nav-item mx-5">
                             <a class="nav-link active" href="{{ route('photos.index') }}">Photos</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item mx-5">
                             <a class="nav-link active" href="{{ route('users.index') }}">Users</a>
+                        </li>
+                        <li class="nav-item mx-5">
+                            <a class="nav-link" href="https://github.com/kuro-vale/kuro-photos" target="_blank">Github</a>
                         </li>
                     </ul>
 
@@ -56,6 +62,9 @@
                         </li>
                         @endif
                         @else
+                        <li class="nav-item mx-5">
+                            <a class="nav-link active" href="{{ route('users.dashboard') }}">Dashboard</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->username }}

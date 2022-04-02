@@ -20,7 +20,7 @@
         <div class="col-md-7">
             <h2 class="featurette-heading">{{ $photo->title }}</h2>
             <p class="lead text-break">{{ $photo->description }}</p>
-            <a href="{{ route('photos.show', $photo) }}" class="btn btn-outline-primary">View more</a>
+            <a href="{{ route('photos.show', $photo) }}" class="btn btn-outline-primary">View Comments</a>
             <p class="text-muted mt-3 mb-0">
                 {{ $photo->created_at->format('M d Y') }}
             </p>
@@ -50,7 +50,7 @@
         <div class="col-md-7 order-md-2">
             <h2 class="featurette-heading">{{ $photo->title }}</h2>
             <p class="lead text-break">{{ $photo->description }}</p>
-            <a href="{{ route('photos.show', $photo) }}" class="btn btn-outline-primary">View more</a>
+            <a href="{{ route('photos.show', $photo) }}" class="btn btn-outline-primary">View Comments</a>
             <p class="text-muted mt-3 mb-0">
                 {{ $photo->created_at->format('M d Y') }}
             </p>

@@ -37,6 +37,8 @@
                 <td><a class="btn btn-outline-primary btn-sm" href="{{ route('photos.edit', $photo) }}">Edit</a></td>
                 <td>
                     <form action="{{ route('photos.destroy', $photo) }}" method="POST">
+                        @csrf
+                        @method('Delete')
                         <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#destroyPhotoModal">Delete</button>
                         <!-- Modal -->
                         <div class="modal fade" id="destroyPhotoModal" tabindex="-1" aria-labelledby="destroyPhotoModalLabel" aria-hidden="true">

@@ -25,7 +25,7 @@
         <div class="col-md-7">
             <h2 class="featurette-heading">{{ $photo->title }}</h2>
             <p class="lead text-break">{{ $photo->description }}</p>
-            <a href="{{ route('photos.show', $photo) }}" class="btn btn-outline-primary">View more</a>
+            <a href="{{ route('photos.show', $photo) }}" class="btn btn-outline-primary">View Comments</a>
             <p class="text-muted mt-3 mb-0">
                 <img src="{{ Storage::url($photo->user->avatar) }}" width="40px" style="border-radius: 50%;object-fit: cover;" height="40px" alt="Avatar of {{ $photo->user->username }}">
                 &ndash;
@@ -59,7 +59,7 @@
         <div class="col-md-7 order-md-2">
             <h2 class="featurette-heading">{{ $photo->title }}</h2>
             <p class="lead text-break">{{ $photo->description }}</p>
-            <a href="{{ route('photos.show', $photo) }}" class="btn btn-outline-primary">View more</a>
+            <a href="{{ route('photos.show', $photo) }}" class="btn btn-outline-primary">View Comments</a>
             <p class="text-muted mt-3 mb-0">
                 <img src="{{ Storage::url($photo->user->avatar) }}" width="40px" style="border-radius: 50%;object-fit: cover;" height="40px" alt="Avatar of {{ $photo->user->username }}">
                 &ndash;
