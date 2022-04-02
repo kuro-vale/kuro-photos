@@ -28,6 +28,6 @@ Route::get('/user/photos/{user:username}', [UserController::class, 'user_photos'
 Route::get('/user/dashboard', [UserController::class, 'dashboard'])->middleware('auth')->name('users.dashboard');
 
 // Comments
-Route::post('/comments', [CommentController::class, 'store'])->middleware('auth')->name('comments.store');
-Route::put('/comments/{comment}', [CommentController::class, 'update'])->middleware('auth')->name('comments.update');
-Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->middleware('auth')->name('comments.destroy');
+Route::post('/photos/{photo}/comments/', [CommentController::class, 'store'])->middleware('auth')->name('comments.store');
+Route::put('/photos/{photo}/comments/{comment}', [CommentController::class, 'update'])->middleware('auth')->name('comments.update');
+Route::delete('/photos/{photo}/comments/{comment}', [CommentController::class, 'destroy'])->middleware('auth')->name('comments.destroy');
