@@ -77,7 +77,10 @@ class UserController extends Controller
             $user->save();
         }
 
-        return redirect()->route('users.edit')->with('status', 'Settings successfully updated!');
+        return redirect()->route('users.edit')->with([
+            'status' => 'Settings updated!',
+            'alert-class' => 'success',
+        ]);
     }
 
     /**
@@ -99,7 +102,10 @@ class UserController extends Controller
             Storage::disk('public')->delete($photo);
         }
         $user->delete();
-        return redirect()->route('users.index')->with('status', 'User deleted!!!');
+        return redirect()->route('users.index')->with([
+            'status' => 'User deleted',
+            'alert-class' => 'danger',
+        ]);
     }
 
     /**

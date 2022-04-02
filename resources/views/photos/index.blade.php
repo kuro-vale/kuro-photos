@@ -11,7 +11,7 @@
     </div>
 
     @if(session('status'))
-    <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+    <div class="alert alert-{{ session('alert-class') }} alert-dismissible fade show mt-2" role="alert">
         {{ session('status') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>

@@ -56,7 +56,10 @@ class PhotoController extends Controller
             'description' => $request->description,
             'image' => $request->file('image')->store('photos', 'public'),
         ]);
-        return redirect()->route('photos.show', $photo)->with('status', 'Successfully added!');
+        return redirect()->route('photos.show', $photo)->with([
+            'status' => 'Successfully added!',
+            'alert-class' => 'success',
+        ]);
     }
 
     /**
@@ -107,7 +110,10 @@ class PhotoController extends Controller
             'title' => $request->title,
             'description' => $request->description,
         ]);
-        return redirect()->route('photos.show', $photo)->with('status', 'Successfully updated!');
+        return redirect()->route('photos.show', $photo)->with([
+            'status' => 'Successfully updated!',
+            'alert-class' => 'success',
+        ]);
     }
 
     /**
@@ -124,7 +130,10 @@ class PhotoController extends Controller
 
         $photo->delete();
 
-        return redirect()->route('photos.index')->with('status', 'Photo deleted');
+        return redirect()->route('photos.index')->with([
+            'status' => 'Photo deleted',
+            'alert-class' => 'danger',
+        ]);
     }
 
     public function __construct()

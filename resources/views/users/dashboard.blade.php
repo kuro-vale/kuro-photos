@@ -33,7 +33,7 @@
             <tr>
                 <td onclick="window.location='{{ route('photos.show', $photo) }}';">{{ $photo->title }}</td>
                 <td onclick="window.location='{{ route('photos.show', $photo) }}';" class="text-break">{{ $photo->description }}</td>
-                <td onclick="window.location='{{ route('photos.show', $photo) }}';">666</td>
+                <td onclick="window.location='{{ route('photos.show', $photo) }}';">{{ count($photo->comments) }}</td>
                 <td><a class="btn btn-outline-primary btn-sm" href="{{ route('photos.edit', $photo) }}">Edit</a></td>
                 <td>
                     <form action="{{ route('photos.destroy', $photo) }}" method="POST">

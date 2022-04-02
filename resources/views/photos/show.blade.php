@@ -8,7 +8,7 @@
                 <div class="card-header">{{ $photo->title }}</div>
                 <div class="card-body">
                     @if(session('status'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <div class="alert alert-{{ session('alert-class') }} alert-dismissible fade show" role="alert">
                         {{ session('status') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>

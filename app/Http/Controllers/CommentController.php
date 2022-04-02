@@ -27,7 +27,10 @@ class CommentController extends Controller
             'photo_id' => $photo->id,
             'body' => $request->body,
         ]);
-        return redirect()->route('photos.show', $photo)->with('status', 'Successfully created');
+        return redirect()->route('photos.show', $photo)->with([
+            'status' => 'Successfully added!',
+            'alert-class' => 'success',
+        ]);
     }
 
     /**
@@ -49,7 +52,10 @@ class CommentController extends Controller
         $comment->update([
             'body' => $request->body
         ]);
-        return redirect()->route('photos.show', $photo)->with('status', 'Successfully updated');
+        return redirect()->route('photos.show', $photo)->with([
+            'status' => 'Successfully updated!',
+            'alert-class' => 'success',
+        ]);
     }
 
     /**
@@ -61,6 +67,13 @@ class CommentController extends Controller
      */
     public function destroy(Photo $photo, Comment $comment)
     {
-        // 
+        $this->authorize('delete', $comment);
+
+        $comment->delete();
+
+        return redirect()->route('photos.show', $photo)->with([
+            'status' => 'Comment deleted',
+            'alert-class' => 'danger',
+        ]);
     }
 }
