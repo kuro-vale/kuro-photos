@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -25,3 +26,8 @@ Route::delete('/user/settings', [UserController::class, 'destroy'])->name('users
 Route::get('/user/photos/{user:username}', [UserController::class, 'user_photos'])->name('users.photos');
 // User Dashboard
 Route::get('/user/dashboard', [UserController::class, 'dashboard'])->middleware('auth')->name('users.dashboard');
+
+// Comments
+Route::post('/comments', [CommentController::class, 'store'])->middleware('auth')->name('comments.store');
+Route::put('/comments/{comment}', [CommentController::class, 'update'])->middleware('auth')->name('comments.update');
+Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->middleware('auth')->name('comments.destroy');
