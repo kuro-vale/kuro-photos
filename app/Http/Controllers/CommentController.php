@@ -27,10 +27,7 @@ class CommentController extends Controller
             'photo_id' => $photo->id,
             'body' => $request->body,
         ]);
-        return redirect()->route('photos.show', $photo)->with([
-            'status' => 'Successfully added!',
-            'alert-class' => 'success',
-        ]);
+        return redirect()->route('photos.show', $photo);
     }
 
     /**
@@ -52,10 +49,7 @@ class CommentController extends Controller
         $comment->update([
             'body' => $request->body
         ]);
-        return redirect()->route('photos.show', $photo)->with([
-            'status' => 'Successfully updated!',
-            'alert-class' => 'success',
-        ]);
+        return redirect()->route('photos.show', $photo);
     }
 
     /**

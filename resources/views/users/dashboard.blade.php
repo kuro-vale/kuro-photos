@@ -39,13 +39,13 @@
                     <form action="{{ route('photos.destroy', $photo) }}" method="POST">
                         @csrf
                         @method('Delete')
-                        <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#destroyPhotoModal">Delete</button>
+                        <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#destroyPhoto{{ $photo->id }}Modal">Delete</button>
                         <!-- Modal -->
-                        <div class="modal fade" id="destroyPhotoModal" tabindex="-1" aria-labelledby="destroyPhotoModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="destroyPhoto{{ $photo->id }}Modal" tabindex="-1" aria-labelledby="destroyPhoto{{ $photo->id }}ModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="destroyPhotoModalLabel">Are you sure?</h5>
+                                        <h5 class="modal-title" id="destroyPhoto{{ $photo->id }}ModalLabel">Are you sure?</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
