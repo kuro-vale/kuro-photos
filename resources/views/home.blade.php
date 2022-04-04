@@ -9,7 +9,7 @@
     </div>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="{{ Storage::url('photos/stones.jpg') }}" class="img-fluid" style="object-fit: cover; object-position: right;">
+            <img src="{{ Storage::disk('google')->url('photos/stones.jpg') }}" class="img-fluid" style="object-fit: cover; object-position: right;">
 
             <div class="container">
                 <div class="carousel-caption text-start">
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="carousel-item">
-            <img src="{{ Storage::url('photos/cat.jpg') }}" class="img-fluid" style="object-fit: cover; object-position: top;">
+            <img src="{{ Storage::disk('google')->url('photos/cat.jpg') }}" class="img-fluid" style="object-fit: cover; object-position: top;">
 
             <div class="container">
                 <div class="carousel-caption">
@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="carousel-item">
-            <img src="{{ Storage::url('photos/women.jpg') }}" class="img-fluid" style="object-fit: cover; object-position: top;">
+            <img src="{{ Storage::disk('google')->url('photos/women.jpg') }}" class="img-fluid" style="object-fit: cover; object-position: top;">
 
             <div class="container">
                 <div class="carousel-caption text-end">

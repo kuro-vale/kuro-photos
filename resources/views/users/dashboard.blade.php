@@ -4,7 +4,7 @@
 <div class="container marketing">
     <div class="d-flex justify-content-between align-items-end">
         <h2 class="featurette-heading">{{ $user->username }}'s Dashboard</h2>
-        <img src="{{ Storage::url($user->avatar) }}" width="120px" style="border-radius: 50%;object-fit: cover;" height="120px" alt="Avatar of {{ $user->username }}" class="mt-4">
+        <img src="{{ Storage::disk('google')->url($user->avatar) }}" width="120px" style="border-radius: 50%;object-fit: cover;" height="120px" alt="Avatar of {{ $user->username }}" class="mt-4">
     </div>
     <div class="container-fluid mt-5 mb-3 d-flex justify-content-between">
         <form class="d-flex w-75">

@@ -71,9 +71,9 @@ class UserController extends Controller
         {
             if ($user->avatar != 'avatars/default-avatar.png')
             {
-                Storage::disk('public')->delete($user->avatar);
+                Storage::disk('google')->delete($user->avatar);
             }
-            $user->avatar = $request->file('avatar')->store('avatars', 'public');
+            $user->avatar = $request->file('avatar')->store('avatars', 'google');
             $user->save();
         }
 
@@ -95,11 +95,11 @@ class UserController extends Controller
         $user_photos = Photo::select('image')->where('user_id', '=', $user->id)->get()->toArray();
         if ($user->avatar != 'avatars/default-avatar.png')
         {
-            Storage::disk('public')->delete($user->avatar);
+            Storage::disk('google')->delete($user->avatar);
         }
         foreach ($user_photos as $photo)
         {
-            Storage::disk('public')->delete($photo);
+            Storage::disk('google')->delete($photo);
         }
         $user->delete();
         return redirect()->route('users.index')->with([

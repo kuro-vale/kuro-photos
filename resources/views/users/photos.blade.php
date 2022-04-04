@@ -4,7 +4,7 @@
 <div class="container marketing">
     <div class="d-flex justify-content-between align-items-end">
         <h2 class="featurette-heading">{{ $user->username }}'s photos</h2>
-        <img src="{{ Storage::url($user->avatar) }}" width="110px" style="border-radius: 50%;object-fit: cover;" height="110px" alt="Avatar of {{ $user->username }}" class="mt-3">
+        <img src="{{ Storage::disk('google')->url($user->avatar) }}" width="110px" style="border-radius: 50%;object-fit: cover;" height="110px" alt="Avatar of {{ $user->username }}" class="mt-3">
     </div>
     <div class="container-fluid mt-5">
         <form class="d-flex w-85">
@@ -20,13 +20,13 @@
         <div class="col-md-7">
             <h2 class="featurette-heading">{{ $photo->title }}</h2>
             <p class="lead text-break">{{ $photo->description }}</p>
-            <a href="{{ route('photos.show', $photo) }}" class="btn btn-outline-primary">View Comments</a>
+            <a href="{{ route('photos.show', $photo) }}#comments" class="btn btn-outline-primary">View Comments</a>
             <p class="text-muted mt-3 mb-0">
                 {{ $photo->created_at->format('M d Y') }}
             </p>
         </div>
         <div class="col-md-5" data-bs-toggle="modal" data-bs-target="#modal{{ $photo->id }}">
-            <img src="{{ Storage::url($photo->image) }}" class="img-fluid" alt="Photo by {{ $photo->user->name }}">
+            <img src="{{ Storage::disk('google')->url($photo->image) }}" class="img-fluid" alt="Photo by {{ $photo->user->name }}">
         </div>
     </div>
     <!-- Modal -->
@@ -38,7 +38,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body d-flex justify-content-center">
-                    <img src="{{ Storage::url($photo->image) }}" class="img-fluid" alt="Photo by {{ $photo->user->name }}">
+                    <img src="{{ Storage::disk('google')->url($photo->image) }}" class="img-fluid" alt="Photo by {{ $photo->user->name }}">
                 </div>
             </div>
         </div>
@@ -50,13 +50,13 @@
         <div class="col-md-7 order-md-2">
             <h2 class="featurette-heading">{{ $photo->title }}</h2>
             <p class="lead text-break">{{ $photo->description }}</p>
-            <a href="{{ route('photos.show', $photo) }}" class="btn btn-outline-primary">View Comments</a>
+            <a href="{{ route('photos.show', $photo) }}#comments" class="btn btn-outline-primary">View Comments</a>
             <p class="text-muted mt-3 mb-0">
                 {{ $photo->created_at->format('M d Y') }}
             </p>
         </div>
         <div class="col-md-5 order-md-1" data-bs-toggle="modal" data-bs-target="#modal{{ $photo->id }}">
-            <img src="{{ Storage::url($photo->image) }}" class="img-fluid" alt="Photo by {{ $photo->user->name }}">
+            <img src="{{ Storage::disk('google')->url($photo->image) }}" class="img-fluid" alt="Photo by {{ $photo->user->name }}">
         </div>
     </div>
     <!-- Modal -->
@@ -68,7 +68,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body d-flex justify-content-center">
-                    <img src="{{ Storage::url($photo->image) }}" class="img-fluid" alt="Photo by {{ $photo->user->name }}">
+                    <img src="{{ Storage::disk('google')->url($photo->image) }}" class="img-fluid" alt="Photo by {{ $photo->user->name }}">
                 </div>
             </div>
         </div>

@@ -8,7 +8,6 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Storage;
 
 class RegisterController extends Controller
 {
@@ -74,7 +73,7 @@ class RegisterController extends Controller
 
         if (array_key_exists('avatar', $data))
         {
-            $user->avatar = $data['avatar']->store('avatars', 'public');
+            $user->avatar = $data['avatar']->store('avatars', 'google');
             $user->save();
         }
         else

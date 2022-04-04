@@ -22,7 +22,7 @@
                             <label for="avatar" class="col-md-4 col-form-label text-md-end">{{ __('Avatar') }}</label>
 
                             <div class="col-md-6">
-                                <img src="{{ Storage::url($user->avatar) }}" width="140px" style="border-radius: 50%;object-fit: cover;" height="140px" class="my-2" alt="Avatar of {{ $user->username }}">
+                                <img src="{{ Storage::disk('google')->url($user->avatar) }}" width="140px" style="border-radius: 50%;object-fit: cover;" height="140px" class="my-2" alt="Avatar of {{ $user->username }}">
                                 <div class="input-group">
                                     <label class="input-group-text">Change Avatar</label>
                                     <input id="avatar" type="file" class="form-control @error('avatar') is-invalid @enderror" name="avatar" accept="image/*">

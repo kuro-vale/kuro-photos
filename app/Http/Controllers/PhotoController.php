@@ -54,7 +54,7 @@ class PhotoController extends Controller
             'user_id' => Auth::id(),
             'title' => $request->title,
             'description' => $request->description,
-            'image' => $request->file('image')->store('photos', 'public'),
+            'image' => $request->file('image')->store('photos', 'google'),
         ]);
         return redirect()->route('photos.show', $photo)->with([
             'status' => 'Successfully added!',
@@ -126,7 +126,7 @@ class PhotoController extends Controller
     {
         $this->authorize('delete', $photo);
 
-        Storage::disk('public')->delete($photo->image);
+        Storage::disk('google')->delete($photo->image);
 
         $photo->delete();
 

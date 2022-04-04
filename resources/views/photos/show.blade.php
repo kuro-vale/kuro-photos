@@ -14,12 +14,12 @@
                 <div class="card-header">{{ $photo->title }}</div>
                 <div class="card-body">
                     <div class="d-flex justify-content-center">
-                        <img src="{{ Storage::url($photo->image) }}" class="img-fluid" alt="Photo by {{ $photo->user->name }}">
+                        <img src="{{ Storage::disk('google')->url($photo->image) }}" class="img-fluid" alt="Photo by {{ $photo->user->name }}">
                     </div>
                     <h4 class="mb-2 mt-4">{{ $photo->description }}</h4>
                 </div>
             </div>
-            <div class="card mt-4">
+            <div class="card mt-4" id="comments">
                 <div class="card-header">Comments</div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('comments.store', $photo) }}#bottom">
@@ -42,7 +42,7 @@
                     <div class="card mt-3" id="comment{{ $comment->id }}">
                         <div class="card-body">
                             <div class="d-flex mb-0">
-                                <img src="{{ Storage::url($comment->user->avatar) }}" width="40px" style="border-radius: 50%;object-fit: cover;" height="40px" alt="Avatar of {{ $photo->user->username }}">
+                                <img src="{{ Storage::disk('google')->url($comment->user->avatar) }}" width="40px" style="border-radius: 50%;object-fit: cover;" height="40px" alt="Avatar of {{ $photo->user->username }}">
                                 <div class="row my-0 mx-2">
                                     <p class="my-0"><a href="{{ route('users.photos', $comment->user) }}" class="link-dark">{{ $comment->user->username }}</a> says:</p>
                                     <p class="my-0">{{ $comment->body }}</p>
