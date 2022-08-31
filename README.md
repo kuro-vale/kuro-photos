@@ -4,7 +4,9 @@ Web app to share your favorite photos, made with laravel.
 
 This web app was made for educationals purposes only.
 
-I enjoyed so much learning Laravel, you can see the [docs here!](https://laravel.com/docs/).
+### Docker image
+
+Run this project with the [docker image](https://hub.docker.com/r/kurovale/kuro-photos) I made for this repo :)
 
 ## Quick setup
 
@@ -14,7 +16,9 @@ You can run this web app on your machine, just follow these steps:
 2. ```cd kuro-photos```
 3. ```composer install```
 4. Create a .env, use .env.example as reference*
-5. ```php artisan serve```
+5. ```php artisan storage:link```
+6. ```php artisan migrate```
+7. ```php artisan serve```
 
 ## Editing .env
 
