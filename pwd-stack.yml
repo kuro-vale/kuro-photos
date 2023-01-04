@@ -1,0 +1,6 @@
+version: "3.9"
+services:
+  app:
+    image: kurovale/kuro-photos:sqlite
+    ports:
+      - 8000:8000
