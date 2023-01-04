@@ -1,5 +1,7 @@
 # Kuro Photos
 
+[![PWD](https://raw.githubusercontent.com/play-with-docker/stacks/master/assets/images/button.png)](https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/kuro-vale/kuro-photos/main/pwd-stack.yml)
+
 Web app to share your favorite photos, made with laravel.
 
 This web app was made for educationals purposes only.
